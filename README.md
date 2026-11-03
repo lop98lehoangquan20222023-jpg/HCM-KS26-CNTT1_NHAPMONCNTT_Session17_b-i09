@@ -1,84 +1,38 @@
-## PHẦN A – THIẾT LẬP PROFILE VÀ BOOKMARK CHUẨN DEV
+PHẦN 1: TẠI SAO LẠI BỊ VĂNG ĐĂNG XUẤT (SESSION CONFLICT)?
+Nguyên nhân: Mọi người dùng chung 1 tài khoản Chrome.
 
-### 1. Hệ quả khi dùng chung 1 Profile cho cả GitHub cá nhân và GitHub công ty
-* Nếu dùng chung một Profile duy nhất, trình duyệt sẽ lưu trữ chung một **Cookies** và **Session Storage**.
-* Khi đăng nhập song song, xác thực giữa tài khoản cá nhân và tài khoản công ty sẽ bị ghi đè hoặc xung đột định danh (Session Conflict), dẫn đến việc liên tục bị văng đăng xuất khỏi hệ thống công ty.
+Hậu quả: Khi bạn mở CarePulse, hệ thống tạo một mã xác thực (Cookie). Thực tập sinh vào sau đăng nhập tài khoản cá nhân, mã mới sẽ ghi đè lên mã cũ, khiến hệ thống CarePulse tưởng bị tấn công và tự động văng (logout) tài khoản của bạn.
 
-### 2. Mô hình 3 Profile chuẩn Developer
+PHẦN 2: MÔ HÌNH 3 PROFILE RIÊNG BIỆT
+Mỗi người/mục đích dùng một Profile độc lập, không dính dữ liệu của nhau:
 
-| Profile | Tên đặt | Mục đích sử dụng |
-| :--- | :--- | :--- |
-| **1** | `Personal` | Dành cho mạng xã hội, giải trí và tài khoản GitHub cá nhân ngoài giờ làm việc. |
-| **2** | `Work` | Dành riêng cho công việc, mã nguồn dự án công ty và GitHub công ty. |
-| **3** | `Test` | Dành cho việc thử nghiệm tính năng, kiểm thử và chạy thử mã lệnh độc lập. |
+CarePulse_Work (Theme Xanh dương): Dành riêng cho khám chữa bệnh, kê đơn.
 
-### 3. Thiết kế cấu trúc Bookmark gồm 3 thư mục
-* **📁 `01_Company`**
-  1. [LMS Portal](https://lms-student.rikkei.edu.vn) *(Hệ thống học tập và quản lý nội bộ)*
-  2. [GitHub](https://github.com) *(Kho chứa mã nguồn dự án)*
-* **📁 `02_Dev_Tools`**
-  1. [Google Fonts](https://fonts.google.com) *(Tra cứu thông số CSS)*
-  2. [ChatGPT](https://chatgpt.com) *(Hỗ trợ tra cứu, giải quyết lỗi và viết code nhanh)*
-* **📁 `03_Learning_Docs`**
-  1. [Tự học](https://tuhoc.cc) *(Tài liệu chuẩn kỹ thuật web)*
-  2. [Google Search](https://www.google.com) *(Công cụ tìm kiếm thông tin và tài liệu lập trình phổ biến nhất)*
+Personal_Staff (Theme Cam/Xám): Dành cho việc cá nhân của nhân viên trong ca.
 
-### 4. Cho đồng nghiệp mượn máy 5 phút
-* **Giải pháp:** Sử dụng **Guest Profile (Chế độ Khách)**.
-* **Lý do:** Chế độ Khách tạo ra một không gian duyệt web hoàn toàn cô lập, không lưu lịch sử, không truy cập được vào mật khẩu hay cookie của các Profile chính, giúp bảo mật tuyệt đối dữ liệu cá nhân.
+Sandbox_Guest (Theme Đỏ/Đậm): Dành cho sinh viên thực tập hoặc khách mượn máy.
 
----
+PHẦN 3: CÂU TRÚC BOOKMARK CHUẨN (Ctrl + Shift + O)
+📁 01_CarePulse_Clinic
 
-## PHẦN B – CHỌN ĐÚNG EXTENSION HỖ TRỢ
+Phần mềm CarePulse | Cổng BHYT | Cổng Đơn thuốc quốc gia
 
-### 1. Lựa chọn Extension xử lý đường link API JSON thô
-* **Nhóm Extension:** Thuộc nhóm **Dev Suite**.
-* **Tên tiện ích:** **JSON Viewer**.
-* **Lý do loại trừ:** Nhóm *Security Suite* chuyên về bảo mật/mật khẩu, còn nhóm *Productivity Suite* chuyên quản lý tác vụ/ghi chú, không có tính năng định dạng cấu trúc dữ liệu JSON.
+📁 02_Pharma_Portal
 
-### 2. Cấu hình quyền Site Access
-* **Cấu hình:** Chọn **`On click`** (Chỉ chạy khi nhấp vào).
-* **Giải thích:** Tuân thủ nguyên tắc tối thiểu hóa quyền hạn (Least Privilege), tránh việc extension chạy ngầm trên mọi trang web gây tốn tài nguyên và tiềm ẩn rủi ro bảo mật.
+Dược thư quốc gia | Tra cứu tương tác thuốc Medscape | Cục Quản lý Dược
 
----
+📁 03_Medical_Tools
 
-## PHẦN C – PHÂN TÍCH LUỒNG HTTP REQUEST
+Thước đo y khoa MDCalc | Thư viện PubMed | Google Dịch
 
-### 1. 4 giai đoạn khi gõ `test.internal-tool.com` và nhấn Enter
-1. **Phân giải tên miền (DNS Lookup):** Tra cứu địa chỉ IP từ tên miền.
-2. **Thiết lập kết nối (TCP Handshake & TLS):** Thiết lập kênh truyền dữ liệu an toàn với máy chủ.
-3. **Gửi HTTP Request:** Gửi yêu cầu HTTP lên máy chủ.
-4. **Nhận HTTP Response & Render:** Nhận dữ liệu trả về và dựng hình giao diện lên màn hình.
+PHẦN 4: MẸO HIỂN THỊ FAVICON-ONLY
+Cách làm: Nhấp chuột phải vào Bookmark -> Chỉnh sửa -> Xóa sạch chữ trong ô Tên, chỉ giữ lại URL -> Lưu.
 
-### 2. So sánh mã trạng thái và hướng debug
+Lợi ích: Thanh công cụ chỉ hiện biểu tượng nhỏ, giúp chứa được gấp 3 lần số lượng trang web mà không bị tràn màn hình.
 
-| Mã trạng thái | Ý nghĩa | Lỗi nằm ở đâu? | Hướng debug ban đầu |
-| :--- | :--- | :--- | :--- |
-| `404 Not Found` | Không tìm thấy tài nguyên yêu cầu trên máy chủ. | Phía Client (sai đường dẫn URL hoặc resource đã bị xóa). | Kiểm tra lại chính tả URL và cấu hình route trên frontend/backend. |
-| `500 Internal Server Error` | Lỗi máy chủ nội bộ bất ngờ trong quá trình xử lý. | Phía Server (lỗi code backend hoặc cơ sở dữ liệu). | Kiểm tra log phía backend và thông báo lỗi từ server. |
+PHẦN 5: XỬ LÝ KHI CÓ KHÁCH MƯỢN MÁY & CẢNH BÁO
+Khi khách mượn máy 30 phút: Bắt buộc mở Guest Profile (Chế độ Khách).
 
-### 3. Tab DevTools xem mã trạng thái HTTP
-* **Tab được chọn:** **Network Tab**.
-* **Lý do không chọn tab khác:** Các tab *Elements*, *Console*, *Application* quản lý giao diện, log mã nguồn hoặc storage cục bộ, không chuyên trách liệt kê danh sách request mạng và status code như tab Network.
+Vì sao không dùng Ẩn danh (Incognito)? Ẩn danh vẫn nhìn thấy Bookmark và lịch sử tìm kiếm cũ. Còn Khách (Guest) tạo một không gian trắng hoàn toàn và tự động xóa sạch khi tắt cửa sổ.
 
----
-
-## PHẦN D – CHẨN ĐOÁN CACHE VÀ COOKIES
-
-### 1. Sửa lỗi F5 vẫn thấy giao diện CSS cũ
-* **Nguyên nhân:** Trình duyệt đang tải tệp cũ được lưu trữ trong **Browser Cache**.
-* **Thao tác khắc phục:** Thực hiện **Hard Reload** bằng tổ hợp phím **`Ctrl` + `F5`** (hoặc `Shift` + `F5`) để ép tải lại toàn bộ tài nguyên mới nhất từ server.
-
-### 2. Rủi ro bảo mật khi Cookie thiếu dấu tích `HttpOnly`
-* **Rủi ro:** Mã độc JavaScript có thể đọc được giá trị `session_id` thông qua câu lệnh `document.cookie`.
-* **Tên loại tấn công:** Tấn công **Cross-Site Scripting (XSS)** kết hợp đánh cắp phiên làm việc (Session Hijacking).
-
-### 3. Đăng xuất nhưng giữ nguyên Cache
-* Mở **Tab Application** $\rightarrow$ Chọn mục **Cookies / Local Storage** của trang web và tiến hành xóa riêng phần phiên đăng nhập, giữ nguyên phần Cache Storage để tài nguyên tĩnh tiếp tục được lưu trữ.
-
----
-
-## PHẦN E – DEBUG BẰNG INSPECT ELEMENT VÀ NETWORK TAB
-
-### 1. Sửa màu nút "Đăng nhập" trực tiếp trên trình duyệt
-* Nhấp chuột phải vào nút $\rightarrow$ Chọn **Inspect** $\rightarrow$ Tại bảng **Styles**, chỉnh sửa trực tiếp mã màu (`background-color`) để kiểm chứng trực quan ngay trên trình duyệt trước khi yêu cầu Dev sửa mã nguồn gốc.
+Cảnh báo Cloud Sync: TUYỆT ĐỐI KHÔNG bật đồng bộ Google cá nhân trên máy phòng khám, tránh việc dữ liệu bệnh nhân bị đẩy về máy nhà, hoặc lịch sử tìm kiếm cá nhân hiện lên trước mặt đồng nghiệp.
