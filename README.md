@@ -1,7 +1,7 @@
 PHẦN 1: TẠI SAO LẠI BỊ VĂNG ĐĂNG XUẤT (SESSION CONFLICT)?
 Nguyên nhân: Mọi người dùng chung 1 tài khoản Chrome.
 
-Hậu quả: Khi bạn mở CarePulse, hệ thống tạo một mã xác thực (Cookie). Thực tập sinh vào sau đăng nhập tài khoản cá nhân, mã mới sẽ ghi đè lên mã cũ, khiến hệ thống CarePulse tưởng bị tấn công và tự động văng (logout) tài khoản của bạn.
+Hậu quả: Khi bạn mở CarePulse, hệ thống tạo một mã xác thực (Cookie). Thực tập sinh vào sau đăng nhập tài khoản cá nhân, mã mới sẽ ghi đè lên mã cũ, khiến hệ thống CarePulse bị tự động văng tài khoản của bạn.
 
 PHẦN 2: MÔ HÌNH 3 PROFILE RIÊNG BIỆT
 Mỗi người/mục đích dùng một Profile độc lập, không dính dữ liệu của nhau:
@@ -15,15 +15,15 @@ Sandbox_Guest (Theme Đỏ/Đậm): Dành cho sinh viên thực tập hoặc kh�
 PHẦN 3: CÂU TRÚC BOOKMARK CHUẨN (Ctrl + Shift + O)
 📁 01_CarePulse_Clinic
 
-Phần mềm CarePulse | Cổng BHYT | Cổng Đơn thuốc quốc gia
+Phần mềm CarePulse | Cổng BHYT | Cổng Đơn thuốc 
 
 📁 02_Pharma_Portal
 
-Dược thư quốc gia | Tra cứu tương tác thuốc Medscape | Cục Quản lý Dược
+Dược thư quốc gia | Tra cứu thuốc 
 
 📁 03_Medical_Tools
 
-Thước đo y khoa MDCalc | Thư viện PubMed | Google Dịch
+Thước đo y khoa | Thư viện | Google Dịch
 
 PHẦN 4: MẸO HIỂN THỊ FAVICON-ONLY
 Cách làm: Nhấp chuột phải vào Bookmark -> Chỉnh sửa -> Xóa sạch chữ trong ô Tên, chỉ giữ lại URL -> Lưu.
